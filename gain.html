@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoseNet Demo</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -12,86 +12,78 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.4.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-   
-  </head>
-  <body>
-    <!-- for navbar  -->
+    <!-- Load p5.js and ml5.js -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+    <script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
 
+    
+</head>
+<body>
+    
+    
     <div class="navbar">
-      <a href="index.html" class="logo">FIT <b>C</b>LUB</a>
-      <ol>
-        <li><a href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#home">Home</a></li>
-        <li><a href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#about">About</a></li>
-        <li><a href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#workout">Workout</a></li>
-        <li><a href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#transformations">Transformations</a></li>
-        <li><a href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#contact">Contact</a></li>
-        <li>
-          <img
-            src="c:\Users\sarga\OneDrive\Desktop\fitness web\chatbot2-removebg-preview.png"
-            alt=""
-            id="ai-nav"
-            class="chatbotimg"
-          />
-        </li>
-        <p id="pchatbot">Hey ,I am chatbot click me</p>     </ol>
-    </div>
-
-    <!-- for home  -->
-    
-    
-            <div class="virtual-assistant">
-                <img width="120px" src="ai.png" alt="image">
-              </div>
-        </div>
+        <a href="index.html" class="logo">FIT <b>C</b>LUB</a>
+        <ol>
+          <li><a href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#home">Home</a></li>
+          <li><a href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#about">About</a></li>
+          <li><a href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#workout">Workout</a></li>
+          <li><a href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#transformations">Transformations</a></li>
+          <li><a href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#contact">Contact</a></li>
+          <li>
+            <img
+              src="c:\Users\sarga\OneDrive\Desktop\fitness web\chatbot2-removebg-preview.png"
+              alt=""
+              id="ai-nav"
+              class="chatbotimg"
+            />
+          </li>
         
-        <div class="weightgain">
-            <div class="weightgainimg"> 
-              <a href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#calculate">Use the BMI healthy weight calculator</a> </div>
-            <div class="gaintextimg">
-               
-                <div class="text">
-                    <h1>How to Gain Weight Fast & Safely</h1>
-                    <h2>Weight Gain Basics: Calorie Mismatch</h2>
-                    <p>Genetically some people are predisposed to being overweight, while others struggle to put weight on.
-                        The general rule of weight gain is you have to eat more calories than you consume.
-                        People who are looking to gain weight slowly should typically consume an additional 300 to 500 calories per day, while people looking to gain weight fast should consume an additional 700 to 1,000 calories daily. <br>
-                        If you exercise more while trying to gain weight, then you have to also add the calories burned during those workouts to your total calorie load. For example, if you were eating 2,000 calories daily & started to burn an extra 600 calories working out each day, you would need to add the above 300 to 500 or 700 to 1,000 calories to the base number of 2,600.</p> 
-                </div>
-                <div class="sideimg">
-                  <img src="gain1.jpg" alt="">
+          <p id="pchatbot">Hello, how can I help you ?</p>
+            </ol>
+      </div>
+  
+      <!-- for ex    -->
+      
+      
+     
+     <div class="exercise-container">
+      <img id="exerciseImage" src="jumpingjacks.gif" alt="Exercise">
+      <div id="timerCircle">
+          <span id="timer">10</span>
+      </div>
+      <button id="startBtn">Start</button>
+      <button id="restartBtn" style="display: none;">Restart</button>
+      <button id="quitBtn" style="display: none;">Quit</button>
+      <button id="pauseBtn" style="display: none;">Pause</button>
+      <button id="skipBtn" style="display: none;">skip</button>
+      <div id="pauseOverlay" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0, 0, 0, 0.8); padding: 20px; border-radius: 10px;">
+          <p style="color: white; text-align: center;"></p>
+          <button id="resumeBtn">Resume</button>
+          
+      </div>
+      
+  </div>
+     
+          
+          <div class="banner1">
+          </div>
+          
+  
+          
+        <div class="chat-box">
+            <div class="h1">Talk to your own assistant...</div>
+            <div class="chat-container"></div>
+            <div class="input-area">
+              <input type="text" class="prompt" placeholder="ask anything...." />
+              <button><i id="arrow1" class="ri-arrow-up-line"></i></button>
             </div>
-            </div>
-            
         </div>
       
-        <div class="speak-page">
-          <i id="closespeak" class="ri-close-large-line"></i>
-          <img width="200px" src="ai.png" alt="img">
-          <h1>Speak Now</h1>
-          <img width="180px" src="voice.gif" alt="img" id="voice">
-        </div>
-        
-      <div class="chat-box">
-          <div class="h1">Talk to your own assistant...</div>
-          <div class="chat-container"></div>
-          <div class="input-area">
-            <input type="text" class="prompt" placeholder="ask anything...." />
-            <button><i id="arrow1" class="ri-arrow-up-line"></i></button>
-          </div>
-      </div>
-    
+  
+  
 
-<!-- for about  -->
-
+  
+    <script src="gain.js"></script>
    
-   <section class="copyright">
-       &copy; copyright <a href="#">WebkitCoding</a> 2021 | All Rights Reserved
-   </section>
-
-    <script src="script.js"></script>
-  </body>
+</body>
 </html>

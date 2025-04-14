@@ -52,17 +52,10 @@
           non.
         </p>
         <a href="#calculate">calculate your bmi</a>
-        <div class="virtual-assistant">
-          <img width="120px" src="ai.png" alt="image" />
-        </div>
+       
       </div>
       <div class="banner"></div>
-      <div class="speak-page">
-        <i id="closespeak" class="ri-close-large-line"></i>
-        <img width="200px" src="ai.png" alt="img" />
-        <h1>Speak Now</h1>
-        <img width="180px" src="voice.gif" alt="img" id="voice" />
-      </div>
+     
       <div class="chat-box">
         <div class="h1">Talk to your own assistant...</div>
         <div class="chat-container"></div>
@@ -73,6 +66,12 @@
       </div>
     </section>
 
+    <div class="speak-page">
+      <i id="closespeak" class="ri-close-large-line"></i>
+      <img width="200px" src="ai.png" alt="img">
+      <h1>Speak Now</h1>
+      <img width="180px" src="voice.gif" alt="img" id="voice">
+    </div>
     <!-- for about  -->
 
     <section id="about" class="about view">
@@ -113,33 +112,11 @@
 
     <!-- for workout   -->
 
-    <section id="workout" class="workout view">
+    <section id="workout" class="workout ">
       <div class="workh1">
         <h1><span>W</span>orkout</h1>
         <p>Be a part of fithub community</p>
         <div class="worktype">
-          <div class="w1">
-            <a href="chest.html"
-              ><img src="chest.jpg" alt="" />
-              <h3><span>C</span>hest Workout</h3></a
-            >
-            <a href="shoulder.html"
-              ><img src="shoulder.webp" alt="" />
-              <h3><span>S</span>houlder Workout</h3></a
-            >
-            <a href="leg.html"
-              ><img src="leg.jpg" alt="" />
-              <h3><span>L</span>eg Workout</h3></a
-            >
-            <a href="back.html"
-              ><img src="back.jpg" alt="" />
-              <h3><span>B</span>ack</h3></a
-            >
-            <a href="biceps.html"
-              ><img src="bicep.jpg" alt="" />
-              <h3><span>B</span>iceps and triceps</h3></a
-            >
-          </div>
           <div class="w2">
             <a href="gain.html"
               ><img src="gain.avif" alt="" />
@@ -153,10 +130,10 @@
               ><img src="yoga.jpg" alt="" />
               <h3><span>Y</span>oga</h3></a
             >
-            <a href="zumbo.html"
+            <!-- <a href="zumbo.html"
               ><img src="zumbo.webp" alt="" />
               <h3><span>Z</span>umbo</h3></a
-            >
+            > -->
             <a href="streching.html"
               ><img src="streching.jpg" alt="" />
               <h3><span>S</span>tretching</h3></a
@@ -165,7 +142,18 @@
         </div>
       </div>
     </section>
-
+    <div id="scroller-1">
+      <div class="scroller-2">
+        <h4>"BE BOLD,</h4>
+        <h4>BE STRONGER,</h4>
+        <h4>BE FIT "</h4>
+      </div>
+      <div class="scroller-2">
+        <h4>BE BOLD,</h4>
+        <h4>BE STRONGER,</h4>
+        <h4>BE FIT "</h4>
+      </div>
+    </div>
     <!-- for diet  -->
 
     <section class="diettopbox">
@@ -184,6 +172,7 @@
     
     
     <!-- for Transformations   -->
+    <section class="transformations" id="transformations">
      <div class="wrapper">
     <div class="slider">
       
@@ -212,7 +201,7 @@
     </div>
     </div>
   </div>
-    
+    </section>
     <!-- for bmi  -->
 
     <section id="calculate" class="calcu_bmi">
@@ -222,15 +211,15 @@
       <div class="calcu-box">
         <div class="blurbox">
           <h2>Let Calculate</h2>
-          <hr />
+          <hr >
           <p class="bmipara">
-            The body index (BMI) calculator calculates body mass index from your
+            The body mass index (BMI) calculator calculates body mass index from your
             weight and height...
           </p>
 
-          <p id="bmip" class="text">Height</p>
+          <p id="bmip" class="text">Height-(cm)</p>
           <input type="text" id="height" />
-          <p class="text">Weight</p>
+          <p class="text">Weight-(kg)</p>
           <input type="text" id="weight" />
           <p id="result"></p>
           <button id="btn" onclick="bmi()">Calculate</button>
@@ -333,6 +322,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="script.js"></script>
+    <script src="script.js" ></script>
   </body>
 </html>

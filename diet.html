@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+      integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- for navbar  -->
+     
+    
+    <div class="navbar">
+      <a href="index.html" class="logo">FIT <b>C</b>LUB</a>
+      <ol>
+        <li>
+          <a
+            href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#home"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#about"
+            >About</a
+          >
+        </li>
+        <li>
+          <a
+            href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#workout"
+            >Workout</a
+          >
+        </li>
+        <li>
+          <a
+            href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#transformations"
+            >Transformations</a
+          >
+        </li>
+        <li>
+          <a
+            href="file:///C:/Users/sarga/OneDrive/Desktop/New%20folder/index.html#contact"
+            >Contact</a
+          >
+        </li>
+        <li>
+          <img
+            src="c:\Users\sarga\OneDrive\Desktop\fitness web\chatbot2-removebg-preview.png"
+            alt=""
+            id="ai-nav"
+            class="chatbotimg"
+          />
+        </li>
+        <p id="pchatbot">Hello, how can I help you ?</p>
+      </ol>
+    </div>
+
+    
+    <div class="speak-page">
+      <i id="closespeak" class="ri-close-large-line"></i>
+      <img width="200px" src="ai.png" alt="img">
+      <h1>Speak Now</h1>
+      <img width="180px" src="voice.gif" alt="img" id="voice">
+    </div>
+    <div class="chat-box">
+      <div class="h1">Talk to your own assistant...</div>
+      <div class="chat-container"></div>
+      <div class="input-area">
+        <input type="text" class="prompt" placeholder="ask anything...." />
+        <button><i id="arrow1" class="ri-arrow-up-line"></i></button>
+      </div>
+    </div>
+  </section>
+    <div class="diet1">
+      <div class="diet2">
+        <div class="dietbg1">
+          <img src="shape-top.png" alt="" />
+          <h2 id="h2diet">Healthy</h2>
+          <h2><span>Diet</span></h2>
+          <hr id="line1" />
+          <p id="dietpara1">its healthilicious</p>
+          <hr id="line2" />
+          <img id="dietimg2" src="pic2-removebg-preview.png" alt="">
+          <h1>The Taste Of Good Health</h1>
+          <p id="dietpara2">
+            Healthy Diet is a promise to create a food culture that is
+            nutritious and delicious at the same time. So enjoy your meal from
+            FIT HUB and stay healthy.
+          </p>
+        </div>
+      </div>
+      <div class="foodicons">
+        <h1>Calorie Calculator</h1>
+        <p>
+          The Calorie Calculator can be used to estimate the number of calories
+          a person needs to consume each day. This calculator can also provide
+          some simple guidelines for gaining or losing weight.
+        </p>
+
+        <div class="row-cal">
+          <div class="col-md-6">
+            <h5>Weight (Kg)</h5>
+            <input type="text" name="" id="we" />
+
+            <h5>Height (Cm)</h5>
+            <input type="text" name="" id="hi" />
+
+            <h5>Age</h5>
+            <input type="text" name="" id="age" />
+
+            <div class="gender-container">
+              <label for="gender">Gender</label>
+              <select id="gender" class="gender-select">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+
+            <div class="btn-container">
+              <button class="btndiet btn-pri" onclick="calo()">
+                Calculate
+              </button>
+              <button class="btndiet btn-sec" onclick="clearCalo()">
+                Clear
+              </button>
+            </div>
+            <p id="result-cal"></p>
+          </div>
+        </div>
+      </div>
+      <div id="scroller">
+        <div class="scroller-1">
+          <h4>"SIMPLE FOOD,</h4>
+          <h4>STRONG FOOD,</h4>
+          <h4>STEADY MIND"</h4>
+        </div>
+        <div class="scroller-1">
+          <h4>SIMPLE FOOD</h4>
+          <h4>STRONG FOOD</h4>
+          <h4>STEADY MIND "</h4>
+        </div>
+      </div>
+      
+      <div class="diet3">
+        <div class="dietleft">
+          <div class="key1">
+            <h1>Eating a balanced diet....</h1>
+            <h5>
+              Eating a healthy, balanced diet is an important part of
+              maintaining good health, and can help you feel your best.
+            </h5>
+            <p>
+              This means eating a wide variety of foods in the right
+              proportions, and consuming the right amount of food and drink to
+              achieve and maintain a healthy body weight.
+              <br />
+              This page covers healthy eating advice for the general population.
+              <br />
+              People with special dietary needs or a medical condition should
+              ask their doctor or a registered dietitian for advice.
+            </p>
+          </div>
+          <div class="key1-1">
+            <h1>How to Gain Weight Fast & Safely</h1>
+            <h3>Weight Gain Basics: Calorie Mismatch
+            </h3>
+            <p>
+              Genetically some people are predisposed to being overweight, while others struggle to put weight on. The general rule of weight gain is you have to eat more calories than you consume. People who are looking to gain weight slowly should typically consume an additional 300 to 500 calories per day, while people looking to gain weight fast should consume an additional 700 to 1,000 calories daily. 
+              <br>
+              If you exercise more while trying to gain weight, then you have to also add the calories burned during those workouts to your total calorie load. For example, if you were eating 2,000 calories daily & started to burn an extra 600 calories working out each day, you would need to add the above 300 to 500 or 700 to 1,000 calories to the base number of 2,600
+            </p>
+          </div>
+          <div class="key1-2">
+            <h1>How to loss Weight Fast & Safely</h1>
+            <p>
+              "Genetically, some people have a higher metabolism, making it easier for them to stay lean, while others may struggle with weight loss. The general rule for weight loss is to consume fewer calories than you burn. A slow and sustainable weight loss approach typically involves reducing daily calorie intake by 300 to 500 calories, while those looking for faster weight loss may aim for a deficit of 700 to 1,000 calories per day.
+<br>
+             If you exercise more while trying to lose weight, you can adjust your calorie intake accordingly. For example, if you were eating 2,000 calories daily and started burning an extra 600 calories through workouts, you would need to ensure your total calorie intake remains in a deficit by maintaining a daily intake of around 1,500 to 1,700 calories, depending on your weight loss goals."
+            </p>
+          </div>
+          <div class="key2">
+            <h1>Food groups in your diet..</h1>
+            <h5>
+              The Eatwell Guide shows that to have a healthy, balanced diet,
+              people should try to:
+            </h5>
+            <ul>
+              <li>
+                Eat at least 5 portions of a variety of fruit and vegetables
+                every day (see 5 A Day)
+              </li>
+
+              <li>
+                Base meals on higher fibre starchy foods like potatoes, bread,
+                rice or pasta
+              </li>
+              <li>
+                Have some dairy or dairy alternatives (such as soya drinks)
+              </li>
+              <li>
+                Eat some beans, pulses, fish, eggs, meat and other protein
+              </li>
+              <li>
+                Choose unsaturated oils and spreads, and eat them in small
+                amounts
+              </li>
+              <li>Drink plenty of fluids (at least 6 to 8 glasses a day)</li>
+            </ul>
+            <p>
+              If you're having foods and drinks that are high in fat, salt and
+              sugar, have these less often and in small amounts.
+              <br />
+              Try to choose a variety of different foods from the 5 main food
+              groups to get a wide range of nutrients.
+              <br />
+              Most people in the UK eat and drink too many calories, too much
+              saturated fat, sugar and salt, and not enough fruit, vegetables,
+              oily fish or fibre.
+              <br />
+              The Eatwell Guide does not apply to children under the age of 2
+              because they have different nutritional needs.
+              <br />
+              After the age of 2 years, children should move to eating the same
+              foods as the rest of the family in the proportions shown in the
+              Eatwell Guide.
+            </p>
+          </div>
+          <div class="key3">
+            <h1>Fruit and vegetables: are you getting your 5 A Day?</h1>
+            <p>
+              Fruit and vegetables are a good source of vitamins and minerals
+              and fibre, and should make up just over a third of the food you
+              eat each day.
+              <br />
+              It's recommended that you eat at least 5 portions of a variety of
+              fruit and vegetables every day. They can be fresh, frozen, canned,
+              dried or juiced.
+              <br />
+              There's evidence that people who eat at least 5 portions of fruit
+              and vegetables a day have a lower risk of heart disease, stroke
+              and some cancers.
+              <br />
+              Eating 5 portions is not as hard as it sounds. A portion is :
+            </p>
+            <ul>
+              <li>80g of fresh, canned or frozen fruit and vegetables.</li>
+              <li>30g of dried fruit – which should be kept to mealtimes.</li>
+              <li>
+                150ml glass of fruit juice or smoothie – but do not have more
+                than 1 portion a day as these drinks are sugary and can damage
+                teeth.
+              </li>
+            </ul>
+            <p>
+              Just 1 apple, banana, pear or similar-sized fruit is 1 portion
+              each.
+              <br />
+              A slice of pineapple or melon is also 1 portion, and 3 heaped
+              tablespoons of vegetables is another portion.
+              <br />
+              Adding a tablespoon of dried fruit, such as raisins, to your
+              morning cereal is an easy way to get 1 portion.
+              <br />
+              You could also swap your mid-morning biscuit for a banana, and add
+              a side salad to your lunch.
+              <br />
+              In the evening, have a portion of vegetables with dinner and fresh
+              fruit with plain, lower fat yoghurt for dessert to reach your 5 A
+              Day.
+            </p>
+          </div>
+          <div class="key4">
+            <h1>Milk and dairy foods (and alternatives)</h1>
+            <p>
+              Milk and dairy foods, such as cheese and yoghurt, are good sources
+              of protein. They also contain calcium, which helps keep your bones
+              healthy.
+              <br />
+              Go for lower fat and lower sugar products where possible.
+              <br />
+              Choose semi-skimmed, 1% fat or skimmed milk, as well as lower fat
+              hard cheeses or cottage cheese, and lower fat, lower sugar
+              yoghurt.
+              <br />
+              Dairy alternatives, such as soya drinks, are also included in this
+              food group.
+              <br />
+              When buying alternatives, choose unsweetened, calcium-fortified
+              versions.
+            </p>
+          </div>
+          <div class="key5">
+            <h1>Beans, pulses, fish, eggs, meat and other proteins</h1>
+            <p>
+              These foods are all good sources of protein, which is essential
+              for the body to grow and repair itself.
+              <br />
+              They're also good sources of a range of vitamins and minerals.
+              <br />
+              Meat is a good source of protein, vitamins and minerals, including
+              iron, zinc and B vitamins. It's also one of the main sources of
+              vitamin B12.
+              <br />
+              Choose lean cuts of meat and skinless poultry whenever possible to
+              cut down on fat. Always cook meat thoroughly.
+              <br />
+              Try to eat less red and processed meat like bacon, ham and
+              sausages. Eggs and fish are also good sources of protein, and
+              contain many vitamins and minerals. Oily fish is particularly rich
+              in omega-3 fatty acids.
+              <br />
+              Aim to eat at least 2 portions of fish a week, including 1 portion
+              of oily fish.
+              <br /><br />
+              You can choose from fresh, frozen or canned, but remember that
+              canned and smoked fish can often be high in salt.
+              <br />
+              Pulses, including beans, peas and lentils, are naturally very low
+              in fat and high in fibre, protein, vitamins and minerals.
+              <br />
+              Nuts are high in fibre, and unsalted nuts make a good snack. But
+              they do still contain high levels of fat, so eat them in
+              moderation.
+            </p>
+          </div>
+          <div class="key6">
+            <h1>Oils and spreads</h1>
+            <p>
+              Some fat in the diet is essential, but on average people in the UK
+              eat too much saturated fat.
+              <br />
+              It's important to get most of your fat from unsaturated oils and
+              spreads.
+              <br />
+              Swapping to unsaturated fats can help lower cholesterol.
+              <br />
+              Remember that all types of fat are high in energy and should be
+              eaten in small amounts.
+            </p>
+          </div>
+          <div class="key7">
+            <h1>Eat less saturated fat, sugar and salt</h1>
+            <p>
+              Too much saturated fat can increase the amount of cholesterol in
+              the blood, which increases your risk of developing heart disease.
+              <br />
+              Regularly consuming foods and drinks high in sugar increases your
+              risk of obesity and tooth decay.
+              <br />
+              Eating too much salt can raise your blood pressure, which
+              increases your risk of getting heart disease or having a stroke.
+            </p>
+          </div>
+        </div>
+        <div class="dietright">
+          <img id="dietimg1" src="1000-Calorie-Diet-Plan.jpg" alt="">
+        
+        </div>
+      </div>
+    </div>
+
+    <section class="copyright">
+      &copy; copyright <a href="#">WebkitCoding</a> 2021 | All Rights Reserved
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>

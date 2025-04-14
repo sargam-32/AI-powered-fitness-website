@@ -195,15 +195,15 @@ function wishMe() {
   let hours = day.getHours();
   if (hours >= 0 && hours < 12) {
     speak(
-      "Good Morning,  welcome to fiitthub gym and mental health    ,   Your AI guide is ready to assist you     how can i help you"
+      "Good Morning,  welcome to fiitthub gym and mental health    ,   Your AI guide is ready to assist you . how can i help you"
     );
   } else if (hours >= 12 && hours < 16) {
     speak(
-      "Good Afternoon, welcome to fiitthub gym and mental health    ,   Your AI guide is ready to assist you     how can i help you"
+      "Good Afternoon, welcome to fiitthub gym and mental health    ,   Your AI guide is ready to assist you . how can i help you"
     );
   } else {
     speak(
-      "Good Evening,  welcome to fiitthub gym and mental health    ,   Your AI guide is ready to assist you     how can i help you"
+      "Good Evening,  welcome to fiitthub gym and mental health    ,   Your AI guide is ready to assist you . how can i help you"
     );
   }
 }
@@ -216,8 +216,7 @@ window.addEventListener("load", () => {
   }
 });
 
-
-
+// ✅ Speak Function
 
 function speak(text) {
   let text_speak = new SpeechSynthesisUtterance(text);
@@ -228,317 +227,387 @@ function speak(text) {
   window.speechSynthesis.speak(text_speak);
 }
 
-// Speech Recognition Initialization
-let speechRecognition =
+// ✅ Initialize Speech Recognition
+let SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
-let recognition = new speechRecognition();
-recognition.continuous = true;  // Mic हमेशा ऑन रहेगा
-recognition.interimResults = false; 
+let recognition = new SpeechRecognition();
+recognition.continuous = true;
+recognition.interimResults = false;
 recognition.lang = "en-US";
 
-// जब भी यूजर बोले, यह फंक्शन ट्रिगर होगा
-recognition.onresult = (event) => {
-  speakpage.style.display = "none";
+let isMicRunning = false;
 
-  let currentIndex = event.resultIndex;
-  let transcript = event.results[currentIndex][0].transcript;
-  content.innerText = transcript;
-  takeCommand(transcript.toLowerCase());
-};
-
-// जब पेज लोड होगा, Mic ऑटोमेटिक स्टार्ट होगा
-window.onload = function () {
-  speak("Welcome! I am your AI fitness assistant. How can I help you?");
-  setTimeout(() => {
-    recognition.start(); // माइक ऑटो चालू हो जाएगा
-  }, 2000); // 2 सेकंड बाद Mic स्टार्ट होगा
-};
-
-// Command Handling
-function takeCommand(message) {
-  if (message.includes("open") && message.includes("chat")) {
-    speak("okay ma'am ");
-    chatbox.classList.add("active-chat-box");
-  } else if (message.includes("close") && message.includes("chat")) {
-    speak("okay ma'am ");
-    chatbox.classList.remove("active-chat-box");
-  } else if (message.includes("back")) {
-    speak("okay ma'am ");
-    window.open("back.html", "_self");
-  } else if (message.includes("chest")) {
-    speak("okay ma'am ");
-    window.open("chest.html", "_self");
-  } else if (message.includes("leg")) {
-    speak("okay ma'am ");
-    window.open("leg.html", "_self");
-  } else if (message.includes("biceps and triceps")) {
-    speak("okay ma'am ");
-    window.open("biceps.html", "_self");
-  } else if (message.includes("shoulder")) {
-    speak("okay ma'am ");
-    window.open("shoulder.html", "_self");
-  } else if (message.includes("about")) {
-    speak("okay ma'am ");
-    window.open("index.html#about", "_self");
-  } else if (message.includes("home")) {
-    speak("okay ma'am ");
-    window.open("index.html#home", "_self");
-  } else if (message.includes("workout")) {
-    speak("okay ma'am ");
-    window.open("index.html#workout", "_self");
-  } else if (message.includes("transformation")) {
-    speak("okay ma'am ");
-    window.open("index.html#diet", "_self");
-  } else if (message.includes("contact")) {
-    speak("okay ma'am ");
-    window.open("index.html#contact", "_self");
-  } else if (message.includes("bmi")) {
-    speak("okay . please enter your height and weight");
-    window.open("index.html#calculate", "_self");
-  } else if (message.includes("who are you")) {
-    speak("I am an AI-powered fitness virtual assistant, created by Sargam ma'am. What can I help you with?");
-  } else if (message.includes("how are you")) {
-    speak("I’m doing well, thanks! How about you?");
+function startMic() {
+  if (!isMicRunning) {
+    console.log("🎤 Starting Mic...");
+    try {
+      recognition.start();
+      isMicRunning = true;
+    } catch (e) {
+      console.error("Mic Start Error:", e);
+    }
   }
 }
 
+recognition.onend = () => {
+  console.log("🔄 Mic Stopped, Restarting...");
+  isMicRunning = false;
+  setTimeout(() => {
+    try {
+      recognition.stop();
+      startMic();
+    } catch (e) {
+      console.error("Mic Restart Error:", e);
+    }
+  }, 1000);
+};
+
+recognition.onresult = (event) => {
+  let transcript = event.results[event.resultIndex][0].transcript
+    .trim()
+    .toLowerCase();
+  console.log("🎤 User Said:", transcript);
+  takeCommand(transcript);
+};
+
+document.addEventListener(
+  "click",
+  () => {
+    startMic();
+  },
+  { once: true }
+);
+
 document.addEventListener("visibilitychange", function () {
-  if (!document.hidden) {
-    recognition.start(); // when user come again - mic on
+  if (!document.hidden && !isMicRunning) {
+    console.log("🎤 Restarting Mic After Tab Switch...");
+    startMic();
   }
 });
 
-// for chest
+function takeCommand(message) {
+  message = message.toLowerCase(); // Normalize message
 
+  // Core UI Commands
+  if (message.includes("open") && message.includes("chat")) {
+    speak("Okay.");
+    chatbox.classList.add("active-chat-box");
+  } else if (message.includes("close") && message.includes("chat")) {
+    speak("Okay.");
+    chatbox.classList.remove("active-chat-box");
 
+  // Workout Page Commands
+  } else if (message.includes("zumbo")) {
+    speak("Okay.");
+    window.open("zumbo.html", "_self");
+  } else if (message.includes("leg")) {
+    speak("Okay.");
+    window.open("leg.html", "_self");
+  } else if (message.includes("biceps") || message.includes("triceps")) {
+    speak("Okay.");
+    window.open("biceps.html", "_self");
+  } else if (message.includes("shoulder")) {
+    speak("Okay.");
+    window.open("shoulder.html", "_self");
+  } else if (message.includes("home")) {
+    speak("Okay.");
+    window.open("index.html#home", "_self");
+  } else if (message.includes("open workout")) {
+    speak("Okay.");
+    window.open("index.html#workout", "_self");
+  } else if (message.includes("transformation") || message.includes("diet")) {
+    speak("Okay.");
+    window.open("index.html#diet", "_self");
+  } else if (message.includes("contact")) {
+    speak("Okay.");
+    window.open("index.html#contact", "_self");
 
+  // BMI and Calculators
+  } else if (message.includes("bmi")) {
+    speak("Okay. Please enter your height and weight.");
+    window.open("index.html#calculate", "_self");
+  } else if (message.includes("calories") && message.includes("eat")) {
+    speak("Let me open a calculator for you.");
+    window.open("diet.html", "_self");
 
+  // Yoga & Stretching
+  } else if (message.includes("open yoga") || message.includes("yoga routine") || message.includes("yoga workout")) {
+    speak("opening a relaxing yoga routine for you.");
+    window.open("yoga.html", "_self");
+  } else if (message.includes("open stretching") || message.includes("stretching workout") || message.includes("stretch routine")) {
+    speak("sure, let's open a good stretching workout.");
+    window.open("streching.html", "_self");
 
+  // Weight Loss
+  } else if (
+    message.includes("open weight loss") ||
+    (message.includes("suggest") && message.includes("workout") && message.includes("loss")) ||
+    message.includes("lose weight") ||
+    message.includes("fat loss")
+  ) {
+    speak("Opening effective workouts to help you lose weight.");
+    window.open("lose.html", "_self");
 
-let startBtn = document.getElementById("startBtn");
-let restartBtn = document.getElementById("restartBtn");
-let quitBtn = document.getElementById("quitBtn");
-let pauseBtn = document.getElementById("pauseBtn");
-let resumeBtn = document.getElementById("resumeBtn");
-let skipBtn = document.getElementById("skipBtn");
-let pauseOverlay = document.getElementById("pauseOverlay");
-let timer = document.getElementById("timer");
-let timerCircle = document.getElementById("timerCircle");
-let exerciseImage = document.getElementById("exerciseImage");
-let whistleSound = new Audio("referee-whistle-blow-gymnasium-6320.mp3");
-let bellSound = new Audio("bell-98033.mp3");
+  // Weight Gain
+  } else if (
+    message.includes("open weight gain") ||
+    (message.includes("gain") && message.includes("weight")) ||
+    (message.includes("suggest") && message.includes("workout") && message.includes("gain"))
+  ) {
+    speak("opening healthy routines to help you gain weight.");
+    window.open("gain.html", "_self");
 
-let exercises = [
-  "jumpingjacks.gif",
-  "pushups.gif",
-  "kneepushup.gif",
-  "pushup rotation.gif",
-  "pushup-variation.gif",
-  "Decline-Push-Up.gif",
-  "burpees.gif",
-  "armcircle.gif",
-  "cobra stretch.gif",
-  "cheststretch.gif",
-];
+  // General Knowledge / FAQ
+  } else if (message.includes("how are you")) {
+    speak("I’m doing well, thanks! How about you?");
+  } else if (message.includes("who are you")) {
+    speak("I am an AI-powered fitness virtual assistant, created by Sargam ma'am. What can I help you with?");
+  } else if (message.includes("what is bmi")) {
+    speak("BMI stands for Body Mass Index. It's a measure of body fat based on your height and weight.");
+  } else if (message.includes("strength training")) {
+    speak("Strength training involves exercises that improve muscle strength and endurance, like lifting weights or bodyweight workouts.");
+  } else if (message.includes("workout at home")) {
+    speak("Absolutely! Home workouts can be very effective with bodyweight exercises, resistance bands, or simple equipment.");
+  } else if (message.includes("best time to workout")) {
+    speak("The best time to work out is whenever you can stay consistent. Morning or evening — both work great.");
+  } else if (message.includes("belly fat")) {
+    speak("Losing belly fat involves regular cardio, strength training, a healthy diet, and good sleep.");
+  } else if (message.includes("balanced diet")) {
+    speak("A balanced diet includes proteins, carbs, fats, vitamins, and minerals in the right proportions.");
+  } else if (message.includes("how much water") || message.includes("drink water")) {
+    speak("On average, aim for 2 to 3 liters a day, depending on your activity level and body size.");
+  } else if (message.includes("benefits of exercise")) {
+    speak("Exercise boosts your energy, improves mood, strengthens your body, and reduces health risks.");
+  } else if (message.includes("fitness plan") || message.includes("help me")) {
+    speak("Sure! I can recommend workouts, track your progress, and keep you motivated.");
 
-let currentExercise = 0;
-let countdownInterval, exerciseInterval, restInterval;
-let paused = false;
-let remainingTime = 0;
-let currentCallback;
-
-startBtn.addEventListener("click", startWorkout);
-restartBtn.addEventListener("click", startWorkout);
-quitBtn.addEventListener("click", () => location.reload());
-pauseBtn.addEventListener("click", pauseWorkout);
-resumeBtn.addEventListener("click", resumeWorkout);
-skipBtn.addEventListener("click", skipExercise);
-
-function startWorkout() {
-  clearAllIntervals();
-  currentExercise = 0;
-  startBtn.style.display = "none";
-  restartBtn.style.display = "block";
-  quitBtn.style.display = "block";
-  skipBtn.style.display = "block";
-  pauseBtn.style.display = "block";
-  resumeBtn.style.display = "none";
-  timerCircle.style.display = "flex";
-
-  exerciseImage.src = exercises[currentExercise];
-
-  startCountdown(10, "Ready to go the next 60 seconds (jumping jacks)", () => {
-    startExercise(60, "jumping jacks", () => {
-      startRest(15);
-    });
-  });
-}
-
-function startCountdown(seconds, message, callback) {
-  let count = seconds;
-  timer.innerText = count;
-  speak(message);
-  currentCallback = callback;
-
-  countdownInterval = setInterval(() => {
-    if (paused) return;
-    if (count > 0) timer.innerText = count;
-    if (count === 3) speak("3");
-    if (count === 2) speak("2");
-    if (count === 1) speak("1");
-    count--;
-    if (count < 0) {
-      clearInterval(countdownInterval);
-      callback();
-    }
-  }, 1000);
-}
-
-function startExercise(seconds, name, callback) {
-  exerciseImage.src = exercises[currentExercise];
-  speak("Start");
-  whistleSound.play();
-  speak(`${seconds} seconds ${name}`);
-
-  let count = seconds;
-  timer.innerText = count;
-  currentCallback = () => startExercise(count, name, callback);
-
-  exerciseInterval = setInterval(() => {
-    if (paused) return;
-    if (count > 0) timer.innerText = count;
-    if (count === 30) speak("Half the time");
-    if (count === 3) speak("3");
-    if (count === 2) speak("2");
-    if (count === 1) speak("1");
-    count--;
-    if (count < 0) {
-      clearInterval(exerciseInterval);
-      callback();
-    }
-  }, 1000);
-}
-
-function startRest(seconds) {
-  let nextExercise = getExerciseName(currentExercise + 1);
-  speak(`Take a rest for the next 15 seconds, next exercise: ${nextExercise}`);
-
-  let count = seconds;
-  timer.innerText = count;
-  currentCallback = () => startExercise(60, nextExercise, startRest);
-
-  restInterval = setInterval(() => {
-    if (paused) return;
-    if (count > 0) timer.innerText = count;
-    if (count === 15) bellSound.play();
-    if (count === 3) speak("3");
-    if (count === 2) speak("2");
-    if (count === 1) speak("1");
-    count--;
-    if (count < 0) {
-      clearInterval(restInterval);
-      currentExercise++;
-      if (currentExercise >= exercises.length) {
-        endWorkout();
-      } else {
-        startExercise(60, nextExercise, startRest);
-      }
-    }
-  }, 1000);
-}
-
-function pauseWorkout() {
-  paused = true;
-  clearAllIntervals();
-  resumeBtn.style.display = "block";
-  pauseOverlay.style.display = "block";
-}
-
-function resumeWorkout() {
-  paused = false;
-  resumeBtn.style.display = "none";
-  pauseOverlay.style.display = "none";
-  if (currentCallback) currentCallback();
-}
-
-function skipExercise() {
-  clearAllIntervals();
-  if (currentExercise >= exercises.length - 1) {
-    endWorkout();
-    return;
+  // Fallback
+  } else {
+    speak("I'm not sure how to help with that yet.");
   }
-  currentExercise++;
-  let nextExerciseName = getExerciseName(currentExercise);
-  startExercise(60, nextExerciseName, () => startRest(15));
 }
 
-function clearAllIntervals() {
-  clearInterval(countdownInterval);
-  clearInterval(exerciseInterval);
-  clearInterval(restInterval);
-}
 
-function speak(text) {
-  let speech = new SpeechSynthesisUtterance(text);
-  speech.rate = 1;
-  speech.pitch = 1;
-  speech.volume = 1;
-  speech.lang = "en-US";
-  window.speechSynthesis.speak(speech);
-}
 
-function getExerciseName(index) {
-  if (index >= exercises.length) return "Workout Complete";
-  return exercises[index].split(".")[0];
-}
+// let startBtn = document.getElementById("startBtn");
+// let restartBtn = document.getElementById("restartBtn");
+// let quitBtn = document.getElementById("quitBtn");
+// let pauseBtn = document.getElementById("pauseBtn");
+// let resumeBtn = document.getElementById("resumeBtn");
+// let skipBtn = document.getElementById("skipBtn");
+// let pauseOverlay = document.getElementById("pauseOverlay");
+// let timer = document.getElementById("timer");
+// let timerCircle = document.getElementById("timerCircle");
+// let exerciseImage = document.getElementById("exerciseImage");
+// let whistleSound = new Audio("referee-whistle-blow-gymnasium-6320.mp3");
+// let bellSound = new Audio("bell-98033.mp3");
 
-function endWorkout() {
-  speak("Workout complete! Good job!");
-  timer.innerText = "Done!";
-  
-  startBtn.style.display = "block";
-  restartBtn.style.display = "none";
-  quitBtn.style.display = "none";
-  skipBtn.style.display = "none";
-  pauseBtn.style.display = "none";
-  resumeBtn.style.display = "none";  
-  timerCircle.style.display = "none";
-}
+// let exercises = [
+//   "jumpingjacks.gif",
+//   "pushups.gif",
+//   "kneepushup.gif",
+//   "pushup rotation.gif",
+//   "pushup-variation.gif",
+//   "Decline-Push-Up.gif",
+//   "burpees.gif",
+//   "armcircle.gif",
+//   "cobra stretch.gif",
+//   "cheststretch.gif",
+// ];
+
+// let currentExercise = 0;
+// let countdownInterval, exerciseInterval, restInterval;
+// let paused = false;
+// let remainingTime = 0;
+// let currentCallback;
+
+// startBtn.addEventListener("click", startWorkout);
+// restartBtn.addEventListener("click", startWorkout);
+// quitBtn.addEventListener("click", () => location.reload());
+// pauseBtn.addEventListener("click", pauseWorkout);
+// resumeBtn.addEventListener("click", resumeWorkout);
+// skipBtn.addEventListener("click", skipExercise);
+
+// function startWorkout() {
+//   clearAllIntervals();
+//   currentExercise = 0;
+//   startBtn.style.display = "none";
+//   restartBtn.style.display = "block";
+//   quitBtn.style.display = "block";
+//   skipBtn.style.display = "block";
+//   pauseBtn.style.display = "block";
+//   resumeBtn.style.display = "none";
+//   timerCircle.style.display = "flex";
+
+//   exerciseImage.src = exercises[currentExercise];
+
+//   startCountdown(10, "Ready to go the next 60 seconds (jumping jacks)", () => {
+//     startExercise(60, "jumping jacks", () => {
+//       startRest(15);
+//     });
+//   });
+// }
+
+// function startCountdown(seconds, message, callback) {
+//   let count = seconds;
+//   timer.innerText = count;
+//   speak(message);
+//   currentCallback = callback;
+
+//   countdownInterval = setInterval(() => {
+//     if (paused) return;
+//     if (count > 0) timer.innerText = count;
+//     if (count === 3) speak("3");
+//     if (count === 2) speak("2");
+//     if (count === 1) speak("1");
+//     count--;
+//     if (count < 0) {
+//       clearInterval(countdownInterval);
+//       callback();
+//     }
+//   }, 1000);
+// }
+
+// function startExercise(seconds, name, callback) {
+//   exerciseImage.src = exercises[currentExercise];
+//   speak("Start");
+//   whistleSound.play();
+//   speak(`${seconds} seconds ${name}`);
+
+//   let count = seconds;
+//   timer.innerText = count;
+//   currentCallback = () => startExercise(count, name, callback);
+
+//   exerciseInterval = setInterval(() => {
+//     if (paused) return;
+//     if (count > 0) timer.innerText = count;
+//     if (count === 30) speak("Half the time");
+//     if (count === 3) speak("3");
+//     if (count === 2) speak("2");
+//     if (count === 1) speak("1");
+//     count--;
+//     if (count < 0) {
+//       clearInterval(exerciseInterval);
+//       callback();
+//     }
+//   }, 1000);
+// }
+
+// function startRest(seconds) {
+//   let nextExercise = getExerciseName(currentExercise + 1);
+//   speak(`Take a rest for the next 15 seconds, next exercise: ${nextExercise}`);
+
+//   let count = seconds;
+//   timer.innerText = count;
+//   currentCallback = () => startExercise(60, nextExercise, startRest);
+
+//   restInterval = setInterval(() => {
+//     if (paused) return;
+//     if (count > 0) timer.innerText = count;
+//     if (count === 15) bellSound.play();
+//     if (count === 3) speak("3");
+//     if (count === 2) speak("2");
+//     if (count === 1) speak("1");
+//     count--;
+//     if (count < 0) {
+//       clearInterval(restInterval);
+//       currentExercise++;
+//       if (currentExercise >= exercises.length) {
+//         endWorkout();
+//       } else {
+//         startExercise(60, nextExercise, startRest);
+//       }
+//     }
+//   }, 1000);
+// }
+
+// function pauseWorkout() {
+//   paused = true;
+//   clearAllIntervals();
+//   resumeBtn.style.display = "block";
+//   pauseOverlay.style.display = "block";
+// }
+
+// function resumeWorkout() {
+//   paused = false;
+//   resumeBtn.style.display = "none";
+//   pauseOverlay.style.display = "none";
+//   if (currentCallback) currentCallback();
+// }
+
+// function skipExercise() {
+//   clearAllIntervals();
+//   if (currentExercise >= exercises.length - 1) {
+//     endWorkout();
+//     return;
+//   }
+//   currentExercise++;
+//   let nextExerciseName = getExerciseName(currentExercise);
+//   startExercise(60, nextExerciseName, () => startRest(15));
+// }
+
+// function clearAllIntervals() {
+//   clearInterval(countdownInterval);
+//   clearInterval(exerciseInterval);
+//   clearInterval(restInterval);
+// }
+
+// function speak(text) {
+//   let speech = new SpeechSynthesisUtterance(text);
+//   speech.rate = 1;
+//   speech.pitch = 1;
+//   speech.volume = 1;
+//   speech.lang = "en-US";
+//   window.speechSynthesis.speak(speech);
+// }
+
+// function getExerciseName(index) {
+//   if (index >= exercises.length) return "Workout Complete";
+//   return exercises[index].split(".")[0];
+// }
+
+// function endWorkout() {
+//   speak("Workout complete! Good job!");
+//   timer.innerText = "Done!";
+
+//   startBtn.style.display = "block";
+//   restartBtn.style.display = "none";
+//   quitBtn.style.display = "none";
+//   skipBtn.style.display = "none";
+//   pauseBtn.style.display = "none";
+//   resumeBtn.style.display = "none";
+//   timerCircle.style.display = "none";
+// }
 
 // // for bmi
-function bmi(){
-var result= document.getElementById('result')
-var cm = document.getElementById('height');
-var kg = document.getElementById('weight');
+function bmi() {
+  var result = document.getElementById("result");
+  var cm = document.getElementById("height");
+  var kg = document.getElementById("weight");
 
-if(cm.value === "" || kg.value === "") {
-  result.textContent = "Fill in the Height and Weight";
-  setTimeout(() => {
-             result.textContent = "";
-          }, 3000);
-        }else{
-            var bmi = kg.value / (cm.value/100 * cm.value/100);
-           var total = bmi.toFixed(2);
-        if (bmi < 18.5) {
-         result.textContent = `Your BMI is ${total} and you are skinny`;
-     } else if (bmi < 25) {     
-         result.textContent = `Your BMI is ${total} and you are healthy`;
-   } else {
-        
-         result.textContent = `Your BMI is ${total} and you are overweight`;
-       }
-       setTimeout(() => {
-        cm.value = ""; // Clears height input
-        kg.value = ""; // Clears weight input
-        result.textContent = ""; // Clears result message
-    }, 5000);
-       
-     }
+  if (cm.value === "" || kg.value === "") {
+    result.textContent = "Fill in the Height and Weight";
+    setTimeout(() => {
+      result.textContent = "";
+    }, 3000);
+  } else {
+    var bmi = kg.value / (((cm.value / 100) * cm.value) / 100);
+    var total = bmi.toFixed(2);
+    if (bmi < 18.5) {
+      result.textContent = `Your BMI is ${total} and you are skinny`;
+    } else if (bmi < 25) {
+      result.textContent = `Your BMI is ${total} and you are healthy`;
+    } else {
+      result.textContent = `Your BMI is ${total} and you are overweight`;
     }
+    setTimeout(() => {
+      cm.value = ""; // Clears height input
+      kg.value = ""; // Clears weight input
+      result.textContent = ""; // Clears result message
+    }, 5000);
+  }
+}
 
-
-    
-    
 // for animation
 
 gsap.from("#about .cols .box img", {
@@ -556,7 +625,6 @@ gsap.from("#about .cols .box img", {
   },
 });
 
-
 gsap.from(".boxes img", {
   y: 50,
   opacity: 0,
@@ -572,9 +640,6 @@ gsap.from(".boxes img", {
   },
 });
 
-
-
-
 // fixed navbar
 
 window.addEventListener("scroll", function () {
@@ -582,5 +647,59 @@ window.addEventListener("scroll", function () {
   nav.classList.toggle("sticky", window.scrollY > 0);
 });
 
-// for chest
+// for calorie calculator
+function calo() {
+  var hdiet = document.getElementById("hi");
+  var wdiet = document.getElementById("we");
+  var age = document.getElementById("age");
+  var finalresult = document.getElementById("result-cal");
+  var genderSelect = document.getElementById("gender");
 
+  // Validate input fields
+  if (!hdiet.value || !wdiet.value || !age.value || !genderSelect.value) {
+    finalresult.textContent = "Fill in Height, Weight, Age, and Gender";
+    setTimeout(() => {
+      finalresult.textContent = "";
+    }, 3000);
+    return;
+  }
+
+  var h = parseFloat(hdiet.value);
+  var w = parseFloat(wdiet.value);
+  var a = parseInt(age.value);
+  var genderValue = genderSelect.value;
+
+  // Check for valid numbers
+  if (isNaN(h) || isNaN(w) || isNaN(a)) {
+    finalresult.textContent = "Please enter valid numbers.";
+    setTimeout(() => {
+      finalresult.textContent = "";
+    }, 3000);
+    return;
+  }
+
+  // Calculate BMR (Basal Metabolic Rate)
+  var bmr;
+  if (genderValue === "male") {
+    bmr = 10 * w + 6.25 * h - 5 * a + 5;
+  } else {
+    bmr = 10 * w + 6.25 * h - 5 * a - 161;
+  }
+
+  // Assume light activity multiplier
+  var calor = bmr * 1.4;
+
+  // Display result
+  finalresult.innerHTML = `Your Daily Calorie Intake: <strong>${calor.toFixed(
+    2
+  )}</strong>`;
+}
+
+// Function to clear all fields
+function clearCalo() {
+  document.getElementById("result-cal").innerHTML = "";
+  document.getElementById("hi").value = "";
+  document.getElementById("we").value = "";
+  document.getElementById("age").value = "";
+  document.getElementById("gender").selectedIndex = 0; // Reset dropdown selection
+}
